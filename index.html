@@ -20,7 +20,7 @@
         .overlay-content {
             position: absolute;
             top: 50%;
-            left: 5%;
+            left: 25%;
             transform: translateY(-50%);
             z-index: 10;
             transition: color 0.2s;
@@ -47,10 +47,10 @@
 <body class="overflow-hidden">
 
     <!-- Contenido fijo en la esquina superior izquierda -->
-    <div class="overlay-content space-y-2">
-        <h1 id="main-title" class="title text-6xl font-black">Where ideas go to die.</h1>
+    <div class="overlay-content space-y-2 flex flex-col justify-center items-center">
+        <h1 id="main-title" class="title text-6xl font-black">Where ideas go to die</h1>
         <a href="scii.html">
-            <button class="explore-button text-2xl font-light animate-pulse">explore?¿</button>
+            <button class="explore-button text-2xl font-light animate-pulse">¿explore?</button>
         </a>
     </div>
 
@@ -140,7 +140,7 @@
             }
 
             // Aplicar desenfoque gaussiano
-            filter(BLUR, 7); // Ajusta el valor para aumentar o disminuir el desenfoque
+            filter(BLUR, 5.5); // Ajusta el valor para aumentar o disminuir el desenfoque
 
             // Dibujar párrafos en la capa 2D
             graphics.clear();
@@ -202,24 +202,35 @@
         const originalTitle = mainTitle.textContent;
 
         mainTitle.addEventListener('mousemove', (e) => {
-            const titleLength = originalTitle.length;
-            const charWidth = 50; // Estimación del ancho de cada carácter
+    const titleRect = mainTitle.getBoundingClientRect();
+    const titleLength = originalTitle.length;
 
-            // Calcular el índice del carácter en el que está el cursor
-            const charIndex = Math.floor(e.clientX / charWidth);
+    // Calcular la posición relativa del ratón dentro del título
+    const relativeX = e.clientX - titleRect.left;
 
-            // Asegurar que el índice está dentro de los límites
-            if (charIndex > 0 && charIndex < titleLength - 1) {
-                let newText = originalTitle.split('');
+    // Ancho de cada carácter basado en el ancho real del título
+    const charWidth = titleRect.width / titleLength;
 
-                // Cambiar la letra del índice del cursor y sus adyacentes
-                newText[charIndex] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-                newText[charIndex - 1] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-                newText[charIndex + 1] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+    // Calcular el índice del carácter
+    const charIndex = Math.floor(relativeX / charWidth);
 
-                mainTitle.textContent = newText.join('');
-            }
-        });
+    // Asegurar que el índice está dentro de los límites
+    if (charIndex >= 0 && charIndex < titleLength) {
+        let newText = originalTitle.split('');
+
+        // Cambiar la letra del índice del cursor y sus adyacentes
+        newText[charIndex] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+        if (charIndex > 0) {
+            newText[charIndex - 1] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+        }
+        if (charIndex < titleLength - 1) {
+            newText[charIndex + 1] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+        }
+
+        mainTitle.textContent = newText.join('');
+    }
+});
+
 
         mainTitle.addEventListener('mouseleave', () => {
             mainTitle.textContent = originalTitle;  // Restaurar el título original al salir
