@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autosabotaje en la creatividad</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap');
+
+        body {
+            font-family: 'IBM Plex Mono', monospace;
+            background-color: white;
+            color: black;
+            transition: background-color 1s, color 1s;
+        }
+
+        .overlay-content {
+            position: absolute;
+            top: 50%;
+            left: 5%;
+            transform: translateY(-50%);
+            z-index: 10;
+            transition: color 0.2s;
+        }
+
+        .title,
+        .explore-button {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .title:hover {
+            cursor: pointer;
+            transform: scale(1.02);
+        }
+
+        .explore-button:hover {
+            cursor: pointer;
+            transform: scale(1.1);
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+
+<body class="overflow-hidden">
+
+    <!-- Contenido fijo en la esquina superior izquierda -->
+    <div class="overlay-content space-y-2">
+        <h1 id="main-title" class="title text-6xl font-black">Where ideas go to die.</h1>
+        <a href="scii.html">
+            <button class="explore-button text-2xl font-light animate-pulse">explore?¿</button>
+        </a>
+    </div>
+
+    <script>
+        const paragraphs = [
+            "1. El juicio externo como detonante de la inseguridad:\n\nCuando una persona percibe que los demás la juzgan, esto puede generar dudas.",
+            "2. Proyección de problemas internos:\n\nLas dudas iniciales generadas por juicios externos se internalizan.",
+            "3. C.",  // Solo una letra para crear variación
+            "Ciclo de retroalimentación negativa:\n\nA medida que aumenta la inseguridad, la mente creativa se cierra, produciendo una sensación de incompetencia.",
+            "4. La saturación y la comparación:\n\nCompararse constantemente puede provocar bloqueo y ansiedad en los creativos.",
+            "Frustración y postergación: El autosabotaje se manifiesta a través del perfeccionismo, llevando a la frustración y a la postergación de ideas valiosas.",
+            "5. Desconexión de la inspiración:\n\nLa comparación lleva a la desconexión y a evitar proyectos por miedo.",
+            "El síndrome del impostor: Es común entre creativos y aparece con el temor de no estar a la altura.",
+            "6. Carga mental del autosabotaje:\n\nEl autosabotaje se convierte en una carga mental, consumiendo energía creativa.",
+            "El arte de la creatividad es también el arte de la incertidumbre. - John Cleese",
+            "7. La autoevaluación excesiva puede llevar a un bloqueo creativo. - Teresa Amabile",
+            "La perfección es el enemigo de lo bueno. - Voltaire"
+        ];
+
+        let paragraphsData = [];
+        let invertColors = false;
+        let graphics;
+        let cubeScale = 0; // Escala inicial del cubo
+        const maxCubeScale = 300; // Tamaño máximo del cubo
+        const scaleSpeed = 1.5; // Velocidad de la escala
+
+        function setup() {
+            createCanvas(windowWidth, windowHeight, WEBGL);
+            graphics = createGraphics(windowWidth, windowHeight);
+            graphics.textAlign(LEFT, TOP);
+            graphics.textFont('IBM Plex Mono');
+
+            // Inicializar los párrafos con posiciones, velocidades y estilos aleatorios
+            for (let i = 0; i < paragraphs.length; i++) {
+                const paragraph = paragraphs[i];
+                const textSize = random(12, 28);
+                const x = random(width);
+                const y = random(height);
+                const xSpeed = random(0.1, 0.5) * (random() < 0.5 ? 1 : -1);
+                const ySpeed = random(0.1, 0.5) * (random() < 0.5 ? 1 : -1);
+                const textLeading = random(10, 25);
+
+                paragraphsData.push({
+                    text: paragraph,
+                    x: x,
+                    y: y,
+                    xSpeed: xSpeed,
+                    ySpeed: ySpeed,
+                    textSize: textSize,
+                    textLeading: textLeading,
+                    isDragging: false
+                });
+            }
+        }
+
+        function draw() {
+            clear();
+            if (invertColors) {
+                background(0);
+                fill(255);
+                graphics.background(0);
+                graphics.fill(255);
+                document.body.style.backgroundColor = "black";
+                document.body.style.color = "white";
+            } else {
+                background(255);
+                fill(0);
+                graphics.background(255);
+                graphics.fill(0);
+                document.body.style.backgroundColor = "white";
+                document.body.style.color = "black";
+            }
+
+            // Dibujar el cubo en 3D con transición
+            push();
+            noFill();
+            stroke(30, 100, 255);
+            strokeWeight(5);
+            rotateX(map(mouseY, 0, height, -PI, PI));
+            rotateY(map(mouseX, 0, width, -PI, PI));
+            box(cubeScale); // Usar el tamaño escalado del cubo
+            pop();
+
+            // Aumentar la escala del cubo hasta su tamaño máximo
+            if (cubeScale < maxCubeScale) {
+                cubeScale += scaleSpeed; // Ajusta la velocidad de escalado
+            }
+
+            // Aplicar desenfoque gaussiano
+            filter(BLUR, 7); // Ajusta el valor para aumentar o disminuir el desenfoque
+
+            // Dibujar párrafos en la capa 2D
+            graphics.clear();
+            for (let para of paragraphsData) {
+                graphics.textSize(para.textSize);
+                graphics.textLeading(para.textLeading);
+                graphics.text(para.text, para.x, para.y);
+
+                // Actualizar posición si no está siendo arrastrado
+                if (!para.isDragging) {
+                    para.x += para.xSpeed;
+                    para.y += para.ySpeed;
+
+                    // Cambiar dirección al llegar a los bordes
+                    if (para.x > width || para.x < 0) para.xSpeed *= -1;
+                    if (para.y > height || para.y < 0) para.ySpeed *= -1;
+                }
+            }
+
+            // Mostrar capa de gráficos
+            image(graphics, -width / 2, -height / 2);
+        }
+
+        function mousePressed() {
+            for (let para of paragraphsData) {
+                if (dist(mouseX, mouseY, para.x, para.y) < 50) {
+                    para.isDragging = true;
+                    para.offsetX = mouseX - para.x;
+                    para.offsetY = mouseY - para.y;
+                }
+            }
+        }
+
+        function mouseDragged() {
+            for (let para of paragraphsData) {
+                if (para.isDragging) {
+                    para.x = mouseX - para.offsetX;
+                    para.y = mouseY - para.offsetY;
+                }
+            }
+        }
+
+        function mouseReleased() {
+            for (let para of paragraphsData) {
+                para.isDragging = false;
+            }
+        }
+
+        function windowResized() {
+            resizeCanvas(windowWidth, windowHeight);
+            graphics.resizeCanvas(windowWidth, windowHeight);
+        }
+
+        setInterval(() => {
+            invertColors = !invertColors;
+        }, 15000);
+
+        const mainTitle = document.getElementById('main-title');
+        const originalTitle = mainTitle.textContent;
+
+        mainTitle.addEventListener('mousemove', (e) => {
+            const titleLength = originalTitle.length;
+            const charWidth = 50; // Estimación del ancho de cada carácter
+
+            // Calcular el índice del carácter en el que está el cursor
+            const charIndex = Math.floor(e.clientX / charWidth);
+
+            // Asegurar que el índice está dentro de los límites
+            if (charIndex > 0 && charIndex < titleLength - 1) {
+                let newText = originalTitle.split('');
+
+                // Cambiar la letra del índice del cursor y sus adyacentes
+                newText[charIndex] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+                newText[charIndex - 1] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+                newText[charIndex + 1] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+
+                mainTitle.textContent = newText.join('');
+            }
+        });
+
+        mainTitle.addEventListener('mouseleave', () => {
+            mainTitle.textContent = originalTitle;  // Restaurar el título original al salir
+        });
+    </script>
+</body>
+
+</html>
