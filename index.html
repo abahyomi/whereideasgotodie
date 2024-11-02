@@ -9,10 +9,18 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400..700;1,400..700&display=swap');
+        
+
+        @font-face {
+            font-family: 'Cancellaresca';
+            src: url('./assets/Cancellaresca-Script.ttf') format('truetype');
+        }
+        
 
         body {
             font-family: 'IBM Plex Mono', monospace;
-            background-color: white;
+            background-color: #E8E5D2;
             color: black;
             transition: background-color 1s, color 1s;
         }
@@ -20,55 +28,77 @@
         .overlay-content {
             position: absolute;
             top: 50%;
-            left: 25%;
+            left: 23%;
             transform: translateY(-50%);
             z-index: 10;
             transition: color 0.2s;
         }
+
+        .title{
+            font-family: "STIX Two Text", serif;
+            font-style:italic;
+        }
+
 
         .title,
         .explore-button {
             transition: transform 0.3s ease-in-out;
         }
 
+        .explore-button {
+            font-style: italic;
+        }
+
         .title:hover {
             cursor: pointer;
             transform: scale(1.02);
         }
+        
 
         .explore-button:hover {
             cursor: pointer;
             transform: scale(1.1);
             background-color: rgba(255, 255, 255, 0.3);
         }
+
+
     </style>
 </head>
 
 <body class="overflow-hidden">
 
     <!-- Contenido fijo en la esquina superior izquierda -->
-    <div class="overlay-content space-y-2 flex flex-col justify-center items-center">
-        <h1 id="main-title" class="title text-6xl font-black">Where ideas go to die</h1>
+    <div class="overlay-content space-y-2 flex flex-col justify-center gap-28 items-center">
+        <div class="tit flex flex-col items-center justify-center">
+            <h1 id="main-title" class="title text-8xl font-black">Where ideas go to die</h1>
+            <p>to all the ideas that almost came to life</p>
+        </div>
+
         <a href="scii.html">
-            <button class="explore-button text-2xl font-light animate-pulse">¿explore?</button>
+            <button class="explore-button text-3xl  animate-pulse">¿explore?</button>
         </a>
     </div>
 
     <script>
-        const paragraphs = [
-            "1. El juicio externo como detonante de la inseguridad:\n\nCuando una persona percibe que los demás la juzgan, esto puede generar dudas.",
-            "2. Proyección de problemas internos:\n\nLas dudas iniciales generadas por juicios externos se internalizan.",
-            "3. C.",  // Solo una letra para crear variación
-            "Ciclo de retroalimentación negativa:\n\nA medida que aumenta la inseguridad, la mente creativa se cierra, produciendo una sensación de incompetencia.",
-            "4. La saturación y la comparación:\n\nCompararse constantemente puede provocar bloqueo y ansiedad en los creativos.",
-            "Frustración y postergación: El autosabotaje se manifiesta a través del perfeccionismo, llevando a la frustración y a la postergación de ideas valiosas.",
-            "5. Desconexión de la inspiración:\n\nLa comparación lleva a la desconexión y a evitar proyectos por miedo.",
-            "El síndrome del impostor: Es común entre creativos y aparece con el temor de no estar a la altura.",
-            "6. Carga mental del autosabotaje:\n\nEl autosabotaje se convierte en una carga mental, consumiendo energía creativa.",
-            "El arte de la creatividad es también el arte de la incertidumbre. - John Cleese",
-            "7. La autoevaluación excesiva puede llevar a un bloqueo creativo. - Teresa Amabile",
-            "La perfección es el enemigo de lo bueno. - Voltaire"
-        ];
+const paragraphs = [
+    "**1. El juicio externo como detonante de la inseguridad:**\n\nCuando una persona percibe que los demás la juzgan, esto puede generar **dudas**.",
+    "**2. Proyección de problemas internos:**\n\nLas dudas iniciales generadas por juicios externos se **internalizan**.",
+    "**3. Ciclo de retroalimentación negativa:**\n\nA medida que aumenta la **inseguridad**, la mente creativa se cierra, produciendo una sensación de **incompetencia**.",
+    "**4. La saturación y la comparación:**\n\nCompararse constantemente puede provocar **bloqueo** y **ansiedad** en los creativos.",
+    "***Frustración y postergación:*** El autosabotaje se manifiesta a través del **perfeccionismo**, llevando a la frustración y a la postergación de ideas valiosas.",
+    "**5. Desconexión de la inspiración:**\n\nLa comparación lleva a la **desconexión** y a evitar proyectos por **miedo**.",
+    "**El síndrome del impostor:** Es común entre creativos y aparece con el temor de no estar a la altura.",
+    "**6. Carga mental del autosabotaje:**\n\nEl autosabotaje se convierte en una **carga mental**, consumiendo energía creativa.",
+    "01011101",
+    "_“El arte de la creatividad es también el arte de la incertidumbre.”_ - **John Cleese**",
+    "**7.** La **autoevaluación excesiva** puede llevar a un **bloqueo creativo.** - **Teresa Amabile**",
+    "_“La perfección es el enemigo de lo bueno.”_ - **Voltaire**",
+    "***Nombre de la Idea: Diario de Texturas de la Ciudad***\n**Fecha de Nacimiento:** 4 de octubre de 2022\n**Fecha de Defunción:** 10 de octubre de 2022\n**Causa de Muerte:** Falta de tiempo y organización\n**Últimos Pensamientos:** _“No tengo tiempo para dedicarme a esto ahora.”_\n**Última Voluntad:** _“Que alguien encuentre valor en las texturas escondidas de su ciudad.”_\n**Firmado por:** La prisa y las prioridades cambiantes.",
+    "***Esta propuesta nace de dar valor a todas las ideas que desarrollamos durante el proceso creativo, pero que no llegan a hacerse realidad.*** Esto puede ser porque no lo considerásemos lo suficientemente buenas, porque no nos acababan de gustar del todo, o simplemente porque abandonamos durante el camino a ideas, dejándolas apartadas.",
+    "***¿Dónde queda todo lo que creamos durante el proceso creativo?*** _¿Se almacena en algún lugar recóndito de nuestro cerebro? ¿Qué hacen ahí, se mueren, se quedan almacenadas esperando a volver a revivir?_",
+    "***A partir de esta idea, empezamos a pensar cómo podría ser este espacio donde van las ideas a morirse, un espacio liminal gris y brutalista, lleno de ideas que se quedaron a medias.*** _Navegar por este espacio sórdido y hostil puede hacer reflexionar._"
+];
+
 
         let paragraphsData = [];
         let invertColors = false;
@@ -86,12 +116,12 @@
             // Inicializar los párrafos con posiciones, velocidades y estilos aleatorios
             for (let i = 0; i < paragraphs.length; i++) {
                 const paragraph = paragraphs[i];
-                const textSize = random(12, 28);
+                const textSize = random(5, 18);
                 const x = random(width);
                 const y = random(height);
                 const xSpeed = random(0.1, 0.5) * (random() < 0.5 ? 1 : -1);
                 const ySpeed = random(0.1, 0.5) * (random() < 0.5 ? 1 : -1);
-                const textLeading = random(10, 25);
+                const textLeading = random(5, 20);
 
                 paragraphsData.push({
                     text: paragraph,
@@ -108,21 +138,22 @@
 
         function draw() {
             clear();
-            if (invertColors) {
-                background(0);
-                fill(255);
-                graphics.background(0);
-                graphics.fill(255);
-                document.body.style.backgroundColor = "black";
-                document.body.style.color = "white";
-            } else {
-                background(255);
-                fill(0);
-                graphics.background(255);
-                graphics.fill(0);
-                document.body.style.backgroundColor = "white";
-                document.body.style.color = "black";
-            }
+if (invertColors) {
+    background(0);
+    fill("#E8E5D2");
+    graphics.background(0);
+    graphics.fill("#E8E5D2");
+    document.body.style.backgroundColor = "black";
+    document.body.style.color = "#E8E5D2";
+} else {
+    background("#E8E5D2");
+    fill(0);
+    graphics.background("#E8E5D2");
+    graphics.fill(0);
+    document.body.style.backgroundColor = "#E8E5D2";
+    document.body.style.color = "black";
+}
+
 
             // Dibujar el cubo en 3D con transición
             push();
