@@ -20,7 +20,7 @@
             justify-content: center;
             align-items: center;
             background-color: black;
-            color: white;
+            color: #E8E5D2;
             font-family: 'IBM Plex Mono', monospace;
         }
 
@@ -39,7 +39,7 @@
             position: absolute;
             width: 200px;
             height: 200px;
-            background-color: white;
+            background-color: #E8E5D2;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -59,22 +59,32 @@
             transition: 300ms;
         }
 
+        #downloadButton{
+            border: none;
+            border-radius: 5px;
+            font-family: 'IBM Plex Mono', monospace;
+            transition: 300ms;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+
         #changeAsciiButton {
             left: 20px;
-            background-color: white;
+            background-color: #E8E5D2;
             color: black;
         }
 
-        #homeButton {
+        #homeButton, #downloadButton {
             right: 20px;
-            background-color: white;
+            background-color: #E8E5D2;
             color: black;
         }
 
-        #changeAsciiButton:hover, #homeButton:hover {
+        #changeAsciiButton:hover, #homeButton:hover, #downloadButton:hover {
             transform: scale(1.1); /* Aumentar tamaño al pasar el mouse */
-            background-color: #f0f0f0; /* Cambiar color de fondo al hover */
+            background-color: #E8E5D2; /* Cambiar color de fondo al hover */
             font-weight: 800;
+            cursor: pointer;
            
         }
 
@@ -85,6 +95,8 @@
 <body>
     <button id="changeAsciiButton">you¿?</button>
     <button onclick="location.href='index.html'" id="homeButton">Space</button>
+    <button id="downloadButton" style="position: absolute; top: 200px; right: 25%; display: none;">your creation</button>
+
 
     <script src="js/sketch.js"></script>
 </body>
