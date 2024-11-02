@@ -10,13 +10,13 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400..700;1,400..700&display=swap');
-        
+
 
         @font-face {
             font-family: 'Cancellaresca';
             src: url('./assets/Cancellaresca-Script.ttf') format('truetype');
         }
-        
+
 
         body {
             font-family: 'IBM Plex Mono', monospace;
@@ -34,9 +34,9 @@
             transition: color 0.2s;
         }
 
-        .title{
+        .title {
             font-family: "STIX Two Text", serif;
-            font-style:italic;
+            font-style: italic;
         }
 
 
@@ -53,15 +53,13 @@
             cursor: pointer;
             transform: scale(1.02);
         }
-        
+
 
         .explore-button:hover {
             cursor: pointer;
             transform: scale(1.1);
             background-color: rgba(255, 255, 255, 0.3);
         }
-
-
     </style>
 </head>
 
@@ -69,35 +67,38 @@
 
     <!-- Contenido fijo en la esquina superior izquierda -->
     <div class="overlay-content space-y-2 flex flex-col justify-center gap-28 items-center">
-        <div class="tit flex flex-col items-center justify-center">
+        <div class="tit flex-col items-center justify-center">
             <h1 id="main-title" class="title text-8xl font-black">Where ideas go to die</h1>
             <p>to all the ideas that almost came to life</p>
         </div>
 
         <a href="scii.html">
-            <button class="explore-button text-3xl  animate-pulse">¿explore?</button>
+            <button class="explore-button text-3xl block animate-pulse">¿explore?</button>
         </a>
     </div>
 
     <script>
-const paragraphs = [
-    "**1. El juicio externo como detonante de la inseguridad:**\n\nCuando una persona percibe que los demás la juzgan, esto puede generar **dudas**.",
-    "**2. Proyección de problemas internos:**\n\nLas dudas iniciales generadas por juicios externos se **internalizan**.",
-    "**3. Ciclo de retroalimentación negativa:**\n\nA medida que aumenta la **inseguridad**, la mente creativa se cierra, produciendo una sensación de **incompetencia**.",
-    "**4. La saturación y la comparación:**\n\nCompararse constantemente puede provocar **bloqueo** y **ansiedad** en los creativos.",
-    "***Frustración y postergación:*** El autosabotaje se manifiesta a través del **perfeccionismo**, llevando a la frustración y a la postergación de ideas valiosas.",
-    "**5. Desconexión de la inspiración:**\n\nLa comparación lleva a la **desconexión** y a evitar proyectos por **miedo**.",
-    "**El síndrome del impostor:** Es común entre creativos y aparece con el temor de no estar a la altura.",
-    "**6. Carga mental del autosabotaje:**\n\nEl autosabotaje se convierte en una **carga mental**, consumiendo energía creativa.",
-    "01011101",
-    "_“El arte de la creatividad es también el arte de la incertidumbre.”_ - **John Cleese**",
-    "**7.** La **autoevaluación excesiva** puede llevar a un **bloqueo creativo.** - **Teresa Amabile**",
-    "_“La perfección es el enemigo de lo bueno.”_ - **Voltaire**",
-    "***Nombre de la Idea: Diario de Texturas de la Ciudad***\n**Fecha de Nacimiento:** 4 de octubre de 2022\n**Fecha de Defunción:** 10 de octubre de 2022\n**Causa de Muerte:** Falta de tiempo y organización\n**Últimos Pensamientos:** _“No tengo tiempo para dedicarme a esto ahora.”_\n**Última Voluntad:** _“Que alguien encuentre valor en las texturas escondidas de su ciudad.”_\n**Firmado por:** La prisa y las prioridades cambiantes.",
-    "***Esta propuesta nace de dar valor a todas las ideas que desarrollamos durante el proceso creativo, pero que no llegan a hacerse realidad.*** Esto puede ser porque no lo considerásemos lo suficientemente buenas, porque no nos acababan de gustar del todo, o simplemente porque abandonamos durante el camino a ideas, dejándolas apartadas.",
-    "***¿Dónde queda todo lo que creamos durante el proceso creativo?*** _¿Se almacena en algún lugar recóndito de nuestro cerebro? ¿Qué hacen ahí, se mueren, se quedan almacenadas esperando a volver a revivir?_",
-    "***A partir de esta idea, empezamos a pensar cómo podría ser este espacio donde van las ideas a morirse, un espacio liminal gris y brutalista, lleno de ideas que se quedaron a medias.*** _Navegar por este espacio sórdido y hostil puede hacer reflexionar._"
-];
+        const paragraphs = [
+            "**1. El juicio externo como detonante de la inseguridad:**\n\nCuando una persona percibe que los demás la juzgan, esto puede generar **dudas**.",
+            "**2. Proyección de problemas internos:**\n\nLas dudas iniciales generadas por juicios externos se **internalizan**.",
+            "**3. Ciclo de retroalimentación negativa:**\n\nA medida que aumenta la **inseguridad**, la mente creativa se cierra, produciendo una sensación de **incompetencia**.",
+            "**4. La saturación y la comparación:**\n\nCompararse constantemente puede provocar **bloqueo** y **ansiedad** en los creativos.",
+            "***Frustración y postergación:*** El autosabotaje se manifiesta a través del **perfeccionismo**, llevando a la frustración y a la postergación de ideas valiosas.",
+            "**5. Desconexión de la inspiración:**\n\nLa comparación lleva a la **desconexión** y a evitar proyectos por **miedo**.",
+            "**El síndrome del impostor:** Es común entre creativos y aparece con el temor de no estar a la altura.",
+            "**6. Carga mental del autosabotaje:**\n\nEl autosabotaje se convierte en una\n **carga mental**, consumiendo energía creativa.",
+            "01011101",
+            "Las ideas flotan en algún lugar entre la intención y el olvido, lugares vacíos \n donde reposan, esperando, o tal vez, sabiendo que no serán más que recuerdos no nacidos.",
+            "_“El arte de la creatividad es también el arte de la incertidumbre.”_ - **John Cleese**",
+            "**7.** La **autoevaluación excesiva** puede llevar a un **bloqueo creativo.** -Teresa Amabile",
+            "El cementerio de las ideas perdidas no es un lugar de lamentos, sino de reflexión.\n Ahí, cada lápida\n lleva inscripta una pregunta:\n ¿Qué habría sido si…?",
+            "02 LVC.",
+            "_“La perfección es el enemigo de lo bueno.”_ - **Voltaire**",
+            "***Nombre de la Idea: Diario de Texturas de la Ciudad***\n**Fecha de Nacimiento:** 4 de octubre de 2022\n**Fecha de Defunción:** 10 de octubre de 2022\n**Causa de Muerte:** Falta de tiempo y organización\n**Últimos Pensamientos:** _“No tengo tiempo para dedicarme a esto ahora.”_\n**Última Voluntad:** _“Que alguien encuentre valor en las texturas escondidas de su ciudad.”_\n**Firmado por:** La prisa y las prioridades cambiantes.",
+            "***Esta propuesta nace de dar valor a todas las ideas que desarrollamos durante el proceso creativo, pero que no llegan a hacerse realidad.*** Esto puede ser porque no lo considerásemos lo suficientemente buenas, porque no nos acababan de gustar del todo, o simplemente porque abandonamos durante el camino a ideas, dejándolas apartadas.",
+            "***¿Dónde queda todo lo que creamos durante el proceso creativo?*\n** _¿Se almacena en algún lugar recóndito de nuestro cerebro?\n ¿Qué hacen ahí, se mueren, se quedan almacenadas esperando a volver a revivir?_",
+            "***A partir de esta idea, empezamos a pensar cómo podría ser este espacio donde van las ideas a morirse, un espacio liminal gris y brutalista, lleno de ideas que se quedaron a medias.*\n** _Navegar por este espacio sórdido y hostil puede hacer reflexionar._"
+        ];
 
 
         let paragraphsData = [];
@@ -137,67 +138,67 @@ const paragraphs = [
         }
 
         function draw() {
-    clear();
-    if (invertColors) {
-        background(0);
-        fill("#FBFAF2");
-        graphics.background(0);
-        graphics.fill("#FBFAF2");
-        document.body.style.backgroundColor = "black";
-        document.body.style.color = "#FBFAF2";
+            clear();
+            if (invertColors) {
+                background(0);
+                fill("#FBFAF2");
+                graphics.background(0);
+                graphics.fill("#FBFAF2");
+                document.body.style.backgroundColor = "black";
+                document.body.style.color = "#FBFAF2";
 
-        // Set cube color for dark mode
-        stroke("#FBFAF2");
-    } else {
-        background("#FBFAF2");
-        fill(0);
-        graphics.background("#FBFAF2");
-        graphics.fill(0);
-        document.body.style.backgroundColor = "#FBFAF2";
-        document.body.style.color = "black";
+                // Set cube color for dark mode
+                stroke("#FBFAF2");
+            } else {
+                background("#FBFAF2");
+                fill(0);
+                graphics.background("#FBFAF2");
+                graphics.fill(0);
+                document.body.style.backgroundColor = "#FBFAF2";
+                document.body.style.color = "black";
 
-        // Set cube color for light mode
-        stroke(0);
-    }
+                // Set cube color for light mode
+                stroke(0);
+            }
 
-    // Draw the 3D cube with transition
-    push();
-    noFill();
-    strokeWeight(5);
-    rotateX(map(mouseY, 0, height, -PI, PI));
-    rotateY(map(mouseX, 0, width, -PI, PI));
-    box(cubeScale); // Use the scaled size of the cube
-    pop();
+            // Draw the 3D cube with transition
+            push();
+            noFill();
+            strokeWeight(5);
+            rotateX(map(mouseY, 0, height, -PI, PI));
+            rotateY(map(mouseX, 0, width, -PI, PI));
+            box(cubeScale); // Use the scaled size of the cube
+            pop();
 
-    // Increase cube scale until it reaches its maximum size
-    if (cubeScale < maxCubeScale) {
-        cubeScale += scaleSpeed;
-    }
+            // Increase cube scale until it reaches its maximum size
+            if (cubeScale < maxCubeScale) {
+                cubeScale += scaleSpeed;
+            }
 
-    // Apply Gaussian blur
-    filter(BLUR, 5.5);
+            // Apply Gaussian blur
+            filter(BLUR, 5.5);
 
-    // Draw paragraphs on the 2D layer
-    graphics.clear();
-    for (let para of paragraphsData) {
-        graphics.textSize(para.textSize);
-        graphics.textLeading(para.textLeading);
-        graphics.text(para.text, para.x, para.y);
+            // Draw paragraphs on the 2D layer
+            graphics.clear();
+            for (let para of paragraphsData) {
+                graphics.textSize(para.textSize);
+                graphics.textLeading(para.textLeading);
+                graphics.text(para.text, para.x, para.y);
 
-        // Update position if not being dragged
-        if (!para.isDragging) {
-            para.x += para.xSpeed;
-            para.y += para.ySpeed;
+                // Update position if not being dragged
+                if (!para.isDragging) {
+                    para.x += para.xSpeed;
+                    para.y += para.ySpeed;
 
-            // Reverse direction at edges
-            if (para.x > width || para.x < 0) para.xSpeed *= -1;
-            if (para.y > height || para.y < 0) para.ySpeed *= -1;
+                    // Reverse direction at edges
+                    if (para.x > width || para.x < 0) para.xSpeed *= -1;
+                    if (para.y > height || para.y < 0) para.ySpeed *= -1;
+                }
+            }
+
+            // Display graphics layer
+            image(graphics, -width / 2, -height / 2);
         }
-    }
-
-    // Display graphics layer
-    image(graphics, -width / 2, -height / 2);
-}
 
         function mousePressed() {
             for (let para of paragraphsData) {
@@ -237,34 +238,34 @@ const paragraphs = [
         const originalTitle = mainTitle.textContent;
 
         mainTitle.addEventListener('mousemove', (e) => {
-    const titleRect = mainTitle.getBoundingClientRect();
-    const titleLength = originalTitle.length;
+            const titleRect = mainTitle.getBoundingClientRect();
+            const titleLength = originalTitle.length;
 
-    // Calcular la posición relativa del ratón dentro del título
-    const relativeX = e.clientX - titleRect.left;
+            // Calcular la posición relativa del ratón dentro del título
+            const relativeX = e.clientX - titleRect.left;
 
-    // Ancho de cada carácter basado en el ancho real del título
-    const charWidth = titleRect.width / titleLength;
+            // Ancho de cada carácter basado en el ancho real del título
+            const charWidth = titleRect.width / titleLength;
 
-    // Calcular el índice del carácter
-    const charIndex = Math.floor(relativeX / charWidth);
+            // Calcular el índice del carácter
+            const charIndex = Math.floor(relativeX / charWidth);
 
-    // Asegurar que el índice está dentro de los límites
-    if (charIndex >= 0 && charIndex < titleLength) {
-        let newText = originalTitle.split('');
+            // Asegurar que el índice está dentro de los límites
+            if (charIndex >= 0 && charIndex < titleLength) {
+                let newText = originalTitle.split('');
 
-        // Cambiar la letra del índice del cursor y sus adyacentes
-        newText[charIndex] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-        if (charIndex > 0) {
-            newText[charIndex - 1] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-        }
-        if (charIndex < titleLength - 1) {
-            newText[charIndex + 1] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
-        }
+                // Cambiar la letra del índice del cursor y sus adyacentes
+                newText[charIndex] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+                if (charIndex > 0) {
+                    newText[charIndex - 1] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+                }
+                if (charIndex < titleLength - 1) {
+                    newText[charIndex + 1] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+                }
 
-        mainTitle.textContent = newText.join('');
-    }
-});
+                mainTitle.textContent = newText.join('');
+            }
+        });
 
 
         mainTitle.addEventListener('mouseleave', () => {
