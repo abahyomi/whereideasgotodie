@@ -9,7 +9,7 @@ let asciiChar = asciiCharSets[currentAsciiSet];
 
 let video;
 let vidw = 75; // Ajustar la resolución aquí
-let vidh = 40; 
+let vidh = 40;
 let w, h;
 let myFont;
 
