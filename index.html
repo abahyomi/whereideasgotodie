@@ -14,7 +14,7 @@
 
         @font-face {
             font-family: 'Cancellaresca';
-            src: url('./assets/Cancellaresca-Script.ttf') format('truetype');
+            src: url('./assets/cancella.ttf') format('truetype');
         }
 
 
@@ -28,14 +28,14 @@
         .overlay-content {
             position: absolute;
             top: 50%;
-            left: 23%;
+            left: 25%;
             transform: translateY(-50%);
             z-index: 10;
             transition: color 0.2s;
         }
 
         .title {
-            font-family: "STIX Two Text", serif;
+            font-family: "Cancellaresca";
             font-style: italic;
         }
 
@@ -67,8 +67,8 @@
 
     <!-- Contenido fijo en la esquina superior izquierda -->
     <div class="overlay-content space-y-2 flex flex-col justify-center gap-28 items-center">
-        <div class="tit flex-col items-center justify-center">
-            <h1 id="main-title" class="title text-8xl font-black">Where ideas go to die</h1>
+        <div class="tit flex flex-col items-center justify-center">
+            <h1 id="main-title" class="title text-9xl ">Where ideas go to die</h1>
             <p>to all the ideas that almost came to life</p>
         </div>
 
@@ -117,7 +117,7 @@
             // Inicializar los párrafos con posiciones, velocidades y estilos aleatorios
             for (let i = 0; i < paragraphs.length; i++) {
                 const paragraph = paragraphs[i];
-                const textSize = random(5, 18);
+                const textSize = random(5, 16);
                 const x = random(width);
                 const y = random(height);
                 const xSpeed = random(0.1, 0.5) * (random() < 0.5 ? 1 : -1);
@@ -255,12 +255,12 @@
                 let newText = originalTitle.split('');
 
                 // Cambiar la letra del índice del cursor y sus adyacentes
-                newText[charIndex] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+                newText[charIndex] = String.fromCharCode(65 + Math.floor(Math.random() * 22));
                 if (charIndex > 0) {
-                    newText[charIndex - 1] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+                    newText[charIndex - 1] = String.fromCharCode(105 + Math.floor(Math.random() * 22));
                 }
                 if (charIndex < titleLength - 1) {
-                    newText[charIndex + 1] = String.fromCharCode(65 + Math.floor(Math.random() * 26));
+                    newText[charIndex + 1] = String.fromCharCode(105 + Math.floor(Math.random() * 22));
                 }
 
                 mainTitle.textContent = newText.join('');
