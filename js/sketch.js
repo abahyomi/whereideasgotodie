@@ -14,38 +14,41 @@ let w, h;
 let myFont;
 
 let imageGrid = [];
-let imageSpacing = 300; // Espaciado entre imágenes en el eje z
-let numImagesPerRow = 10; // Número de imágenes en cada fila
-let backImages = []; // Array para guardar imágenes traseras
+let imageSpacing = 300;
+let numImagesPerRow = 10;
+let backImages = [];
+let posterImages = [];
 let posterImage;
-let showPoster = false; // Controla si el póster debe mostrarse
-let posterAlpha = 255; // Transparencia del póster
-let posterScale = 1; // Escala del póster
-let posterPosition = { x: 0, y: 0 }; // Posición del póster
-let draggingPoster = false; // Controla si se está arrastrando el póster
-let offset = { x: 0, y: 0 }; // Offset para arrastrar el póster
+let showPoster = false;
+let posterAlpha = 0;
+let posterScale = 0.5;
+let posterPosition = { x: 0, y: 0 };
+let draggingPoster = false;
+let offset = { x: 0, y: 0 };
 
 function preload() {
   myFont = loadFont('assets/IBMPlexMono-Regular.ttf');
-  
-  // Cargar las imágenes disponibles
-  for (let i = 1; i <= 8; i++) { 
+
+  // Cargar imágenes de fondo
+  for (let i = 1; i <= 21; i++) {
     try {
-      let img = loadImage(`assets/image${i}.jpg`);
+      let img = loadImage(`assets/${i}.png`);
       backImages.push(img);
     } catch (error) {
-      console.log(`Imagen image${i}.jpg no encontrada, omitiendo.`);
+      console.log(`Imagen ${i}.jpg no encontrada, omitiendo.`);
     }
   }
-  // Cargar la imagen del póster
-  posterImage = loadImage('assets/poster1.jpg'); 
+  // Cargar los pósters
+  for (let i = 1; i <= 3; i++) {
+    posterImages.push(loadImage(`assets/poster${i}.png`));
+  }
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight, WEBGL);
   textFont(myFont);
-  
-  video = createCapture(VIDEO, function(stream) {
+
+  video = createCapture(VIDEO, function (stream) {
     console.log("Video capturado con éxito");
     video.size(vidw, vidh);
     video.hide();
@@ -57,47 +60,54 @@ function setup() {
   for (let i = 0; i < numImagesPerRow; i++) {
     let leftImage = createGraphics(100, 250);
     let rightImage = createGraphics(100, 150);
-    
     leftImage.background("#FBFAF2");
     rightImage.background("#FBFAF2");
-
     let randomBackImage = random(backImages);
-
     imageGrid.push({
-      x: -width / 4, y: 0, z: i * imageSpacing,
-      imgFront: leftImage, imgBack: randomBackImage, 
-      angle: 0, isHovering: false
+      x: -width / 4,
+      y: 0,
+      z: i * imageSpacing,
+      imgFront: leftImage,
+      imgBack: randomBackImage,
+      angle: 0,
+      isHovering: false,
     });
-
     imageGrid.push({
-      x: width / 4, y: 0, z: i * imageSpacing,
-      imgFront: rightImage, imgBack: randomBackImage,
-      angle: 0, isHovering: false
+      x: width / 4,
+      y: 0,
+      z: i * imageSpacing,
+      imgFront: rightImage,
+      imgBack: randomBackImage,
+      angle: 0,
+      isHovering: false,
     });
   }
 
-  const changeAsciiButton = document.getElementById('changeAsciiButton');
-  changeAsciiButton.addEventListener('click', changeAsciiStyle);
+  const changeAsciiButton = document.getElementById("changeAsciiButton");
+  changeAsciiButton.addEventListener("click", changeAsciiStyle);
 
-  // Iniciar el temporizador para mostrar el póster después de 10 segundos
+  // Seleccionar un póster aleatorio y mostrarlo después de 10 segundos
   setTimeout(() => {
+    posterImage = random(posterImages);
     showPoster = true;
-    downloadButton.style.display = 'block'; // Mostrar botón de descarga
+    downloadButton.style.display = 'block'; // Mostrar el botón de descarga
   }, 10000);
 }
 
-// Botón de descarga de póster
+// Botón de descarga para el póster
 const downloadButton = document.getElementById('downloadButton');
 downloadButton.addEventListener('click', () => {
-  let tempGraphics = createGraphics(posterImage.width, posterImage.height);
-  tempGraphics.image(posterImage, 0, 0);
+  if (posterImage) {
+    let tempGraphics = createGraphics(posterImage.width, posterImage.height);
+    tempGraphics.image(posterImage, 0, 0);
 
-  tempGraphics.canvas.toBlob(function(blob) {
-    let link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = 'poster.jpg';
-    link.click();
-  });
+    tempGraphics.canvas.toBlob(function(blob) {
+      let link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = 'poster.jpg';
+      link.click();
+    });
+  }
 });
 
 function draw() {
@@ -110,26 +120,22 @@ function draw() {
     let yPos = imgData.y;
     let zPos = imgData.z;
 
-    // Calcular posición del mouse en coordenadas relativas
-    let screenXPos = width / 2 + xPos;
-    let screenYPos = height / 2 + yPos;
-
-    // Comprobar si el mouse está sobre este bloque individualmente
-    imgData.isHovering = (mouseX > screenXPos - 50 && mouseX < screenXPos + 50) &&
-                         (mouseY > screenYPos - 75 && mouseY < screenYPos + 75);
+    imgData.isHovering =
+      mouseX > width / 2 + xPos - 50 &&
+      mouseX < width / 2 + xPos + 50 &&
+      mouseY > height / 2 + yPos - 75 &&
+      mouseY < height / 2 + yPos + 75;
 
     push();
     translate(xPos, yPos, -zPos);
 
-    // Control de rotación por imagen
     if (imgData.isHovering) {
-      imgData.angle = min(imgData.angle + 0.3, PI); // Incrementa el ángulo si está hover
+      imgData.angle = min(imgData.angle + 0.3, PI);
     } else {
-      imgData.angle = max(imgData.angle - 0.3, 0); // Reduce el ángulo si no está hover
+      imgData.angle = max(imgData.angle - 0.3, 0);
     }
 
-    rotateY(imgData.angle); // Rotación en Y solo para este bloque
-
+    rotateY(imgData.angle);
     let currentImage = imgData.angle >= PI / 2 ? imgData.imgBack : imgData.imgFront;
     imageMode(CENTER);
     image(currentImage, 0, 0, 100, 150);
@@ -142,14 +148,15 @@ function draw() {
     }
   }
 
+  // Mostrar póster con animación de transparencia y escala
   if (showPoster) {
+    posterAlpha = min(posterAlpha + 5, 255);
+    posterScale = min(posterScale + 0.02, 1);
     push();
-    translate(posterPosition.x, posterPosition.y, 1); // Ajusta para estar detrás de otros elementos
+    translate(posterPosition.x, posterPosition.y, 1);
     tint(255, posterAlpha);
-
     let scaledWidth = posterImage.width * posterScale;
     let scaledHeight = posterImage.height * posterScale;
-
     imageMode(CENTER);
     image(posterImage, 0, 0, scaledWidth, scaledHeight);
     pop();
@@ -157,7 +164,11 @@ function draw() {
     fill(255);
     textSize(32);
     textAlign(LEFT);
-    text("Poster generado mediante trackeo de tus movimientos", width * 0.5 + 20, 0); 
+    text(
+      "Poster generado mediante trackeo de tus movimientos",
+      width * 0.5 + 20,
+      0
+    );
   }
 
   if (video.loadedmetadata) {
@@ -181,7 +192,7 @@ function drawAsciiBackground() {
         let x = i * w + w / 2;
         let y = j * h + h / 2;
         let t = asciiChar.charAt(tIndex);
-        
+
         fill("#E8E5D2");
         textSize(w * 0.6);
         textAlign(CENTER, CENTER);
@@ -209,8 +220,12 @@ function mouseMoved() {
     let posterWidth = posterImage.width * posterScale;
     let posterHeight = posterImage.height * posterScale;
 
-    if (mouseX > width / 2 - posterWidth / 2 && mouseX < width / 2 + posterWidth / 2 &&
-        mouseY > height / 2 - posterHeight / 2 && mouseY < height / 2 + posterHeight / 2) {
+    if (
+      mouseX > width / 2 - posterWidth / 2 &&
+      mouseX < width / 2 + posterWidth / 2 &&
+      mouseY > height / 2 - posterHeight / 2 &&
+      mouseY < height / 2 + posterHeight / 2
+    ) {
       cursor(HAND);
     } else {
       cursor(ARROW);
@@ -220,9 +235,9 @@ function mouseMoved() {
 
 function mousePressed() {
   if (showPoster) {
-      draggingPoster = true;
-      offset.x = mouseX - posterPosition.x;
-      offset.y = mouseY - posterPosition.y;
+    draggingPoster = true;
+    offset.x = mouseX - posterPosition.x;
+    offset.y = mouseY - posterPosition.y;
   }
 }
 
